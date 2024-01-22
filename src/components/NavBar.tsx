@@ -10,6 +10,7 @@ import {
 } from "../constants/navLinks";
 import { NavLink } from "../types/navLink";
 import { ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const navLinks = [dashboard, users, products, transactions, supports];
 
@@ -26,7 +27,9 @@ const NavBar = () => {
     <motion.div
       animate={isOpen ? "expanded" : "nonExpanded"}
       variants={variants}
-      className={`py-12 flex flex-col border border-r-1 w-1/5 h-screen relative ${isOpen ? 'px-10' : 'px-4'}`}
+      className={`py-12 flex flex-col border border-r-1 w-1/5 h-screen relative ${
+        isOpen ? "px-10" : "px-4"
+      }`}
     >
       <div className="brand flex space-x-3 items-center">
         <img src={logo} alt="my brand" />
@@ -45,22 +48,23 @@ const NavBar = () => {
       <div className="mt-10 flex flex-col space-y-8 pl-2">
         {navLinks.map((item) => {
           return (
-            <div
-              key={item.id}
-              onClick={() => setActiveItem(item)}
-              className={`p-2 flex space-x-3 ${
-                activeItem.id === item.id
-                  ? "bg-teal-500 text-white rounded"
-                  : ""
-              } ${isOpen ? 'p-2' : ''}`}
-            >
-              <item.icon
-                color={`${activeItem.id === item.id ? "#fff" : "#14b8a6"}`}
-              />
-              <span className={`${isOpen ? "block" : "hidden"}`}>
-                {item.lable}
-              </span>
-            </div>
+            <Link to="/" key={item.id}>
+              <div
+                onClick={() => setActiveItem(item)}
+                className={`p-2 flex space-x-3 ${
+                  activeItem.id === item.id
+                    ? "bg-teal-500 text-white rounded"
+                    : ""
+                } ${isOpen ? "p-2" : ""}`}
+              >
+                <item.icon
+                  color={`${activeItem.id === item.id ? "#fff" : "#14b8a6"}`}
+                />
+                <span className={`${isOpen ? "block" : "hidden"}`}>
+                  {item.lable}
+                </span>
+              </div>
+            </Link>
           );
           ("");
         })}
